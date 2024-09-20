@@ -25,9 +25,9 @@ public class UserDaoHibernateImpl implements UserDao {
                 "name VARCHAR(100) NOT NULL, " +
                 "lastName VARCHAR(100), " +
                 "age SMALLINT)";
-        try (Session session = sessionFactory.openSession()) { //открываем новую сессию
-            Transaction transaction = session.beginTransaction();//начинает транзакцию, для атомарности
-            session.createSQLQuery(sql).executeUpdate(); //выполнение эскуэль запроса
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.createSQLQuery(sql).executeUpdate(); 
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,7 +80,7 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public List<User> getAllUsers() {
         try (Session session = sessionFactory.openSession()) {
-            Query<User> query = session.createQuery("FROM User", User.class); //HQL запрос
+            Query<User> query = session.createQuery("FROM User", User.class); 
             return query.list();
         } catch (Exception e) {
             e.printStackTrace();
